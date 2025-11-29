@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Viaje al Cosmos</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: white;
+            overflow-x: hidden;
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        h1 {
+            font-size: 4em;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #667eea, #764ba2, #f093fb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.3); }
+        }
+
+        .subtitle {
+            font-size: 1.5em;
+            color: #a8a8a8;
+            margin-top: 10px;
+        }
+
+        .planets {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+
+        .planet-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            animation: fadeInUp 1s ease-out backwards;
+        }
+
+        .planet-card:nth-child(1) { animation-delay: 0.1s; }
+        .planet-card:nth-child(2) { animation-delay: 0.2s; }
+        .planet-card:nth-child(3) { animation-delay: 0.3s; }
+        .planet-card:nth-child(4) { animation-delay: 0.4s; }
+        .planet-card:nth-child(5) { animation-delay: 0.5s; }
+        .planet-card:nth-child(6) { animation-delay: 0.6s; }
+
+        .planet-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.4);
+            border-color: rgba(102, 126, 234, 0.5);
+        }
+
+        .planet-icon {
+            font-size: 4em;
+            margin-bottom: 15px;
+            display: block;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .planet-card:nth-child(2) .planet-icon { animation-delay: 0.5s; }
+        .planet-card:nth-child(3) .planet-icon { animation-delay: 1s; }
+        .planet-card:nth-child(4) .planet-icon { animation-delay: 1.5s; }
+        .planet-card:nth-child(5) .planet-icon { animation-delay: 2s; }
+        .planet-card:nth-child(6) .planet-icon { animation-delay: 2.5s; }
+
+        h3 {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            color: #667eea;
+        }
+
+        p {
+            line-height: 1.6;
+            color: #d0d0d0;
+        }
+
+        .stat {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9em;
+            color: #a8a8a8;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            margin-top: 60px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .rocket {
+            font-size: 3em;
+            display: inline-block;
+            animation: rocket 2s ease-in-out infinite;
+        }
+
+        @keyframes rocket {
+            0%, 100% { transform: translateY(0) rotate(-45deg); }
+            50% { transform: translateY(-20px) rotate(-45deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+    
+    <div class="container">
+        <header>
+            <h1>🌌 VIAJE AL COSMOS</h1>
+            <p class="subtitle">Explorando las maravillas de nuestro universo</p>
+        </header>
+
+        <div class="planets">
+            <div class="planet-card">
+                <span class="planet-icon">🌍</span>
+                <h3>Tierra</h3>
+                <p>Nuestro hogar azul, el único planeta conocido con vida. Un oasis perfecto en la inmensidad del espacio.</p>
+                <div class="stat">📏 Distancia al Sol: 149.6 millones km<br>🌡️ Temperatura media: 15°C</div>
+            </div>
+
+            <div class="planet-card">
+                <span class="planet-icon">🔴</span>
+                <h3>Marte</h3>
+                <p>El planeta rojo, nuestro próximo destino. Un mundo de desiertos oxidados y volcanes gigantescos.</p>
+                <div class="stat">📏 Distancia al Sol: 227.9 millones km<br>⏱️ Día marciano: 24.6 horas</div>
+            </div>
+
+            <div class="planet-card">
+                <span class="planet-icon">🪐</span>
+                <h3>Saturno</h3>
+                <p>El señor de los anillos, una joya del sistema solar. Sus anillos están hechos de hielo y roca.</p>
+                <div class="stat">📏 Distancia al Sol: 1.4 mil millones km<br>💍 Anillos visibles desde la Tierra</div>
+            </div>
+
+            <div class="planet-card">
+                <span class="planet-icon">🌙</span>
+                <h3>Luna</h3>
+                <p>Nuestro satélite natural y primer paso fuera de casa. Pisada por humanos en 1969.</p>
+                <div class="stat">📏 Distancia a la Tierra: 384,400 km<br>👨‍🚀 12 humanos la han pisado</div>
+            </div>
+
+            <div class="planet-card">
+                <span class="planet-icon">☀️</span>
+                <h3>El Sol</h3>
+                <p>Nuestra estrella madre, fuente de toda la vida. Una bola de plasma ardiente de 4.6 mil millones de años.</p>
+                <div class="stat">🌡️ Temperatura núcleo: 15 millones °C<br>💫 99.86% de la masa del sistema solar</div>
+            </div>
+
+            <div class="planet-card">
+                <span class="planet-icon">🌌</span>
+                <h3>Vía Láctea</h3>
+                <p>Nuestra galaxia hogar, con 200-400 mil millones de estrellas. Una espiral de luz y misterio.</p>
+                <div class="stat">📏 Diámetro: 100,000 años luz<br>⭐ Billones de planetas por descubrir</div>
+            </div>
+        </div>
+
+        <footer>
+            <span class="rocket">🚀</span>
+            <p style="margin-top: 20px; font-size: 1.2em;">El cosmos nos espera. La exploración continúa...</p>
+        </footer>
+    </div>
+
+    <script>
+        // Crear estrellas
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 200; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.width = Math.random() * 3 + 'px';
+            star.style.height = star.style.width;
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            starsContainer.appendChild(star);
+        }
+
+        // Efecto hover en las tarjetas
+        const cards = document.querySelectorAll('.planet-card');
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.background = 'rgba(102, 126, 234, 0.1)';
+            });
+            card.addEventListener('mouseleave', function() {
+                this.style.background = 'rgba(255, 255, 255, 0.05)';
+            });
+        });
+    </script>
+</body>
+</html>
